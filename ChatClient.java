@@ -3,7 +3,7 @@ import java.io.*;
 
 public class ChatClient
 {
-	String serv;
+	String serv, address, exit;
 	int port;
 	ChatClient()
 	{
@@ -17,13 +17,15 @@ public class ChatClient
 		{
 			System.out.println("Connecting to " + serv + " on port " + port);
 			Socket client = new Socket(serv, port);
-			System.out.println("Just connected to " + client.getRemoteSocketAddress());
+			address = client.getRemoteSocketAddress().toString();
+			System.out.println("Just connected to " + address);
 			OutputStream outToServer = client.getOutputStream();
 			DataOutputStream out = new DataOutputStream(outToServer);
 			out.writeUTF("Hello from " + client.getLocalSocketAddress());
 			InputStream inFromServer = client.getInputStream();
 			DataInputStream in = new DataInputStream(inFromServer);
-			System.out.println("Server says " + in.readUTF());
+			exit = in.readUTF();
+			System.out.println("Server says " + exit);
 			client.close();
 		}
 		catch(IOException ioe)

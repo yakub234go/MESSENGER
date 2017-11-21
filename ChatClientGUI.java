@@ -36,13 +36,14 @@ public class ChatClientGUI implements ActionListener
 	
 	public void actionPerformed(ActionEvent e)
 	{
-		System.out.println("Button Clicked " + e.getSource());
-		Object source = e.getSource();
-		
+		Object source = e.getSource();		
 		if (source == conn)
 		{
 			client = new ChatClient();
 			client.connect_to_server();
+			msgbox.append("Connecting to " + client.serv + " on port " + client.port + "\n");
+			msgbox.append("Just connected to " + client.address + "\n");
+			msgbox.append("Server says " + client.exit + "\n");
 		}
 		else if(source == exit)
 		{
